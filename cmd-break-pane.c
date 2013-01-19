@@ -76,6 +76,10 @@ cmd_break_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 		w->last = NULL;
 	layout_close_pane(wp);
 
+	//aleks: focus on separated pane
+	if (w->active->focus_notify & PANE_FOCUS_NOTIFY)
+	  bufferevent_write(w->active->event, "\033[I", 3);
+
 	w = wp->window = window_create1(s->sx, s->sy);
 	TAILQ_INSERT_HEAD(&w->panes, wp, entry);
 	w->active = wp;
