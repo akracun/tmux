@@ -390,8 +390,13 @@ window_set_active_pane(struct window *w, struct window_pane *wp)
 		if (w->active == NULL)
 			w->active = TAILQ_LAST(&w->panes, window_panes);
 		if (w->active == wp)
-			return;
+			break;
 	}
+	// aleks: write key-string to focused pane
+	if (w->last->focus_notify & PANE_FOCUS_NOTIFY)
+	  bufferevent_write(w->last->event, "\033[O", 3);
+	if (wp->focus_notify & PANE_FOCUS_NOTIFY)
+	  bufferevent_write(wp->event, "\033[I", 3);
 }
 
 struct window_pane *
@@ -484,6 +489,9 @@ window_remove_pane(struct window *w, struct window_pane *wp)
 
 	TAILQ_REMOVE(&w->panes, wp, entry);
 	window_pane_destroy(wp);
+	// aleks: write key-string to focused pane
+	if (w != NULL && w->active != NULL && w->active->event != NULL)
+	  bufferevent_write(w->active->event, "\033[I", 3);
 }
 
 struct window_pane *
@@ -628,6 +636,8 @@ window_pane_create(struct window *w, u_int sx, u_int sy, u_int hlimit)
 
 	wp->sx = sx;
 	wp->sy = sy;
+
+	wp->focus_notify = 0;
 
 	wp->pipe_fd = -1;
 	wp->pipe_off = 0;
@@ -948,6 +958,19 @@ window_pane_alternate_off(struct window_pane *wp, struct grid_cell *gc,
 	wp->saved_grid = NULL;
 
 	wp->flags |= PANE_REDRAW;
+}
+
+//aleks: new term settings for focus
+void
+window_pane_focus_notification_on(struct window_pane *wp)
+{
+	wp->focus_notify |= PANE_FOCUS_NOTIFY;
+}
+
+void 
+window_pane_focus_notification_off(struct window_pane *wp)
+{
+	wp->focus_notify &= ~PANE_FOCUS_NOTIFY;
 }
 
 int

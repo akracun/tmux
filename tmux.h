@@ -926,6 +926,8 @@ struct window_pane {
 	int		 flags;
 #define PANE_REDRAW 0x1
 #define PANE_DROP 0x2
+	int		 focus_notify;
+#define PANE_FOCUS_NOTIFY 0x1
 
 	char		*cmd;
 	char		*shell;
@@ -2131,6 +2133,8 @@ void		 window_pane_alternate_on(struct window_pane *,
 		     struct grid_cell *, int);
 void		 window_pane_alternate_off(struct window_pane *,
 		     struct grid_cell *, int);
+void		 window_pane_focus_notification_on(struct window_pane *);
+void		 window_pane_focus_notification_off(struct window_pane *);
 int		 window_pane_set_mode(
 		     struct window_pane *, const struct window_mode *);
 void		 window_pane_reset_mode(struct window_pane *);
