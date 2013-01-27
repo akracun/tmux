@@ -29,7 +29,7 @@
 
 /*
  * Handle keys input from the outside terminal. tty_keys[] is a base table of
- * supported keys which are looked up in terminfo(5) and translated into a
+ * supported keys which are looked up in terminfo(6) and translated into a
  * ternary tree (a binary tree of binary trees).
  */
 
@@ -185,6 +185,10 @@ const struct tty_key_ent tty_keys[] = {
 	{ 0,	"\033[8@",	KEYC_END|KEYC_CTRL|KEYC_SHIFT,	TTYKEY_RAW },
 	{ 0,	"\033[6@",	KEYC_NPAGE|KEYC_CTRL|KEYC_SHIFT,TTYKEY_RAW },
 	{ 0,	"\033[5@",	KEYC_PPAGE|KEYC_CTRL|KEYC_SHIFT,TTYKEY_RAW },
+
+	//aleks:define new terminal keys for focus
+	{ 0,	"\033[I",	KEYC_FOCUS_IN, TTYKEY_RAW },
+	{ 0,	"\033[O",	KEYC_FOCUS_OUT, TTYKEY_RAW },
 
 	/* terminfo lookups below this line so they can override raw keys. */
 

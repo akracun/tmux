@@ -502,6 +502,11 @@ const struct options_table_entry window_options_table[] = {
 	  .default_num = 1
 	},
 
+	{ .name = "focus-filter",
+	  .type = OPTIONS_TABLE_FLAG,
+	  .default_num = 0
+	},
+
 	{ .name = "force-height",
 	  .type = OPTIONS_TABLE_NUMBER,
 	  .minimum = 0,

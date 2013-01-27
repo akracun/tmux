@@ -237,6 +237,9 @@ enum key_code {
 	KEYC_KP_ENTER,
 	KEYC_KP_ZERO,
 	KEYC_KP_PERIOD,
+
+  KEYC_FOCUS_IN,
+  KEYC_FOCUS_OUT,
 };
 
 /* Termcap codes. */
