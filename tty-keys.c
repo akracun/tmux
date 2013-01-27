@@ -174,6 +174,8 @@ const struct tty_default_key_raw tty_default_raw_keys[] = {
 	{ "\033[8@", KEYC_END|KEYC_CTRL|KEYC_SHIFT },
 	{ "\033[6@", KEYC_NPAGE|KEYC_CTRL|KEYC_SHIFT },
 	{ "\033[5@", KEYC_PPAGE|KEYC_CTRL|KEYC_SHIFT },
+	{ "\033[I",	KEYC_FOCUS_IN },
+	{ "\033[O",	KEYC_FOCUS_OUT },
 };
 
 /* Default terminfo(5) keys. */

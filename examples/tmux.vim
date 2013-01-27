@@ -69,7 +69,7 @@ syn keyword tmuxOptsSet
 syn keyword tmuxOptsSetw
 	\ aggressive-resize alternate-screen automatic-rename
 	\ c0-change-interval c0-change-trigger clock-mode-colour
-	\ clock-mode-style force-height force-width layout-history-limit
+	\ clock-mode-style focus-filter force-height force-width layout-history-limit
 	\ main-pane-height main-pane-width mode-attr mode-bg mode-fg move-keys
 	\ mode-mouse monitor-activity monitor-content monitor-silence
 	\ other-pane-height other-pane-width pane-base-index remain-on-exit
