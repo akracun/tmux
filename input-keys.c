@@ -130,6 +130,10 @@ const struct input_key_ent input_keys[] = {
 	{ KEYC_KP_ENTER,	"\n",		0 },
 	{ KEYC_KP_ZERO,		"0",		0 },
 	{ KEYC_KP_PERIOD,	".",		0 },
+
+  //aleks:paired input for focus
+	{ KEYC_FOCUS_IN,		"\033[I",		0 },
+	{ KEYC_FOCUS_OUT,	  "\033[O",		0 },
 };
 
 /* Translate a key code into an output key sequence. */
@@ -190,6 +194,12 @@ input_key(struct window_pane *wp, int key)
 	}
 	dlen = strlen(ike->data);
 	log_debug2("found key 0x%x: \"%s\"", key, ike->data);
+
+  if ( key == KEYC_FOCUS_IN || key == KEYC_FOCUS_OUT ) {
+	  if (options_get_number(&wp->window->options, "focus-filter"))
+	    if (!(wp->focus_notify & PANE_FOCUS_NOTIFY))
+	      return;
+  }
 
 	/* Prefix a \033 for escape. */
 	if (key & KEYC_ESCAPE)
