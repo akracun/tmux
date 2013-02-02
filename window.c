@@ -490,7 +490,8 @@ window_remove_pane(struct window *w, struct window_pane *wp)
 	TAILQ_REMOVE(&w->panes, wp, entry);
 	window_pane_destroy(wp);
 	// aleks: write key-string to focused pane
-	if (w != NULL && w->active != NULL && w->active->event != NULL)
+	if (w != NULL && w->active != NULL && w->active->event != NULL
+	    && w->active->focus_notify & PANE_FOCUS_NOTIFY)
 	  bufferevent_write(w->active->event, "\033[I", 3);
 }
 
