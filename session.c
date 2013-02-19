@@ -345,13 +345,7 @@ session_next(struct session *s, int alert)
 		if (alert && ((wl = session_next_alert(wl)) == NULL))
 			return (-1);
 	}
-	if (wl == s->curw)
-		return (1);
-	winlink_stack_remove(&s->lastw, wl);
-	winlink_stack_push(&s->lastw, s->curw);
-	s->curw = wl;
-	winlink_clear_flags(wl);
-	return (0);
+	return session_set_current_winlink(s, wl);
 }
 
 struct winlink *
@@ -382,13 +376,7 @@ session_previous(struct session *s, int alert)
 		if (alert && (wl = session_previous_alert(wl)) == NULL)
 			return (-1);
 	}
-	if (wl == s->curw)
-		return (1);
-	winlink_stack_remove(&s->lastw, wl);
-	winlink_stack_push(&s->lastw, s->curw);
-	s->curw = wl;
-	winlink_clear_flags(wl);
-	return (0);
+	return session_set_current_winlink(s, wl);
 }
 
 /* Move session to specific window. */
@@ -398,15 +386,7 @@ session_select(struct session *s, int idx)
 	struct winlink	*wl;
 
 	wl = winlink_find_by_index(&s->windows, idx);
-	if (wl == NULL)
-		return (-1);
-	if (wl == s->curw)
-		return (1);
-	winlink_stack_remove(&s->lastw, wl);
-	winlink_stack_push(&s->lastw, s->curw);
-	s->curw = wl;
-	winlink_clear_flags(wl);
-	return (0);
+	return session_set_current_winlink(s, wl);
 }
 
 /* Move session to last used window. */
@@ -421,10 +401,27 @@ session_last(struct session *s)
 	if (wl == s->curw)
 		return (1);
 
+	return session_set_current_winlink(s, wl);
+}
+
+int
+session_set_current_winlink(struct session *s, struct winlink *wl)
+{
+	if (wl == NULL)
+		return (-1);
+	if (wl == s->curw)
+		return (1);
+
+	if (s->curw != NULL && s->curw->window != NULL)
+		window_pane_focus_notify(s->curw->window->active, 0);
+
 	winlink_stack_remove(&s->lastw, wl);
 	winlink_stack_push(&s->lastw, s->curw);
 	s->curw = wl;
 	winlink_clear_flags(wl);
+
+	window_pane_focus_notify(s->curw->window->active, 1);
+
 	return (0);
 }
 

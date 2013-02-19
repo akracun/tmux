@@ -2148,6 +2148,7 @@ void		 window_pane_alternate_off(struct window_pane *,
 		     struct grid_cell *, int);
 void		 window_pane_focus_notification_on(struct window_pane *);
 void		 window_pane_focus_notification_off(struct window_pane *);
+void		 window_pane_focus_notify(struct window_pane *, int);
 int		 window_pane_set_mode(
 		     struct window_pane *, const struct window_mode *);
 void		 window_pane_reset_mode(struct window_pane *);
@@ -2289,6 +2290,7 @@ int		 session_next(struct session *, int);
 int		 session_previous(struct session *, int);
 int		 session_select(struct session *, int);
 int		 session_last(struct session *);
+int		 session_set_current_winlink(struct session *, struct winlink *);
 struct session_group *session_group_find(struct session *);
 u_int		 session_group_index(struct session_group *);
 void		 session_group_add(struct session *, struct session *);
