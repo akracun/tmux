@@ -76,7 +76,6 @@ cmd_break_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 		w->last = NULL;
 	layout_close_pane(wp);
 
-	//aleks: focus on separated pane
 	window_pane_focus_notify(w->active, 1);
 
 	w = wp->window = window_create1(s->sx, s->sy);

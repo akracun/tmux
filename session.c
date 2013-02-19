@@ -345,7 +345,7 @@ session_next(struct session *s, int alert)
 		if (alert && ((wl = session_next_alert(wl)) == NULL))
 			return (-1);
 	}
-	return session_set_current_winlink(s, wl);
+	return (session_set_current_winlink(s, wl));
 }
 
 struct winlink *
@@ -376,7 +376,7 @@ session_previous(struct session *s, int alert)
 		if (alert && (wl = session_previous_alert(wl)) == NULL)
 			return (-1);
 	}
-	return session_set_current_winlink(s, wl);
+	return (session_set_current_winlink(s, wl));
 }
 
 /* Move session to specific window. */
@@ -386,7 +386,7 @@ session_select(struct session *s, int idx)
 	struct winlink	*wl;
 
 	wl = winlink_find_by_index(&s->windows, idx);
-	return session_set_current_winlink(s, wl);
+	return (session_set_current_winlink(s, wl));
 }
 
 /* Move session to last used window. */
@@ -401,7 +401,7 @@ session_last(struct session *s)
 	if (wl == s->curw)
 		return (1);
 
-	return session_set_current_winlink(s, wl);
+	return (session_set_current_winlink(s, wl));
 }
 
 int

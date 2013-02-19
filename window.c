@@ -392,7 +392,6 @@ window_set_active_pane(struct window *w, struct window_pane *wp)
 		if (w->active == wp)
 			break;
 	}
-	// aleks: write key-string to focused pane
 	window_pane_focus_notify(w->last, 0);
 	window_pane_focus_notify(wp, 1);
 }
@@ -487,7 +486,6 @@ window_remove_pane(struct window *w, struct window_pane *wp)
 
 	TAILQ_REMOVE(&w->panes, wp, entry);
 	window_pane_destroy(wp);
-	// aleks: write key-string to focused pane
 	if (w != NULL)
 	  window_pane_focus_notify(w->active, 1);
 }
