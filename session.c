@@ -412,17 +412,15 @@ session_set_current_winlink(struct session *s, struct winlink *wl)
 	if (wl == s->curw)
 		return (1);
 
-	if (s->curw && s->curw->window->active &&
-		s->curw->window->active->focus_notify & PANE_FOCUS_NOTIFY)
-		bufferevent_write(s->curw->window->active->event, "\033[O", 3);
+	if (s->curw != NULL && s->curw->window != NULL)
+		window_pane_focus_notify(s->curw->window->active, 0);
 
 	winlink_stack_remove(&s->lastw, wl);
 	winlink_stack_push(&s->lastw, s->curw);
 	s->curw = wl;
 	winlink_clear_flags(wl);
 
-	if (s->curw->window->active->focus_notify & PANE_FOCUS_NOTIFY)
-		bufferevent_write(s->curw->window->active->event, "\033[I", 3);
+	window_pane_focus_notify(s->curw->window->active, 1);
 
 	return (0);
 }
