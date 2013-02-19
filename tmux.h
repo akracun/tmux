@@ -929,6 +929,7 @@ struct window_pane {
 	int		 flags;
 #define PANE_REDRAW 0x1
 #define PANE_DROP 0x2
+  int    has_focus;
 	int		 focus_notify;
 #define PANE_FOCUS_NOTIFY 0x1
 

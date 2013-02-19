@@ -633,6 +633,7 @@ window_pane_create(struct window *w, u_int sx, u_int sy, u_int hlimit)
 	wp->sx = sx;
 	wp->sy = sy;
 
+	wp->has_focus = 0;
 	wp->focus_notify = 0;
 
 	wp->pipe_fd = -1;
@@ -972,8 +973,12 @@ void
 window_pane_focus_notify(struct window_pane *wp, int focused)
 {
 	if (wp != NULL && wp->event != NULL
-	    && wp->focus_notify & PANE_FOCUS_NOTIFY)
-		bufferevent_write(wp->event, focused ? "\033[I" : "\033[O", 3);
+	    && wp->has_focus != focused)
+	{
+	  wp->has_focus = focused;
+	  if (wp->focus_notify & PANE_FOCUS_NOTIFY)
+	    bufferevent_write(wp->event, focused ? "\033[I" : "\033[O", 3);
+	}
 }
 
 int

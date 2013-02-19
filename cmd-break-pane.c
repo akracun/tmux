@@ -64,7 +64,9 @@ cmd_break_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 
 	w = wl->window;
 	TAILQ_REMOVE(&w->panes, wp, entry);
+	int wp_lost_focus = 0;
 	if (wp == w->active) {
+		wp_lost_focus = 1;
 		w->active = w->last;
 		w->last = NULL;
 		if (w->active == NULL) {
@@ -74,9 +76,13 @@ cmd_break_pane_exec(struct cmd *self, struct cmd_ctx *ctx)
 		}
 	} else if (wp == w->last)
 		w->last = NULL;
-	layout_close_pane(wp);
 
-	window_pane_focus_notify(w->active, 1);
+	if ( wp_lost_focus && args_has(self->args, 'd')) {
+	  window_pane_focus_notify(wp, 0);
+	  window_pane_focus_notify(w->active, 1);
+	}
+
+	layout_close_pane(wp);
 
 	w = wp->window = window_create1(s->sx, s->sy);
 	TAILQ_INSERT_HEAD(&w->panes, wp, entry);
