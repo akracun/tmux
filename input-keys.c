@@ -131,7 +131,6 @@ const struct input_key_ent input_keys[] = {
 	{ KEYC_KP_ZERO,		"0",		0 },
 	{ KEYC_KP_PERIOD,	".",		0 },
 
-  //aleks:paired input for focus
 	{ KEYC_FOCUS_IN,		"\033[I",		0 },
 	{ KEYC_FOCUS_OUT,	  "\033[O",		0 },
 };

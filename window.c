@@ -958,7 +958,6 @@ window_pane_alternate_off(struct window_pane *wp, struct grid_cell *gc,
 	wp->flags |= PANE_REDRAW;
 }
 
-//aleks: new term settings for focus
 void
 window_pane_focus_notification_on(struct window_pane *wp)
 {
