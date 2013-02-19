@@ -186,7 +186,6 @@ const struct tty_key_ent tty_keys[] = {
 	{ 0,	"\033[6@",	KEYC_NPAGE|KEYC_CTRL|KEYC_SHIFT,TTYKEY_RAW },
 	{ 0,	"\033[5@",	KEYC_PPAGE|KEYC_CTRL|KEYC_SHIFT,TTYKEY_RAW },
 
-	//aleks:define new terminal keys for focus
 	{ 0,	"\033[I",	KEYC_FOCUS_IN, TTYKEY_RAW },
 	{ 0,	"\033[O",	KEYC_FOCUS_OUT, TTYKEY_RAW },
 

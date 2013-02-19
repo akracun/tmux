@@ -1258,7 +1258,6 @@ input_csi_dispatch(struct input_ctx *ictx)
 			screen_write_mousemode_off(&ictx->ctx);
 			break;
 		case 1004:
-		  //aleks
 			window_pane_focus_notification_off(wp);
 			break;
 		case 1005:
@@ -1321,7 +1320,6 @@ input_csi_dispatch(struct input_ctx *ictx)
 			screen_write_mousemode_on(&ictx->ctx, MODE_MOUSE_ANY);
 			break;
 		case 1004:
-		  //aleks
 			window_pane_focus_notification_on(wp);
 			break;
 		case 1005:
