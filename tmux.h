@@ -2137,8 +2137,6 @@ void		 window_pane_alternate_on(struct window_pane *,
 		     struct grid_cell *, int);
 void		 window_pane_alternate_off(struct window_pane *,
 		     struct grid_cell *, int);
-void		 window_pane_focus_notification_on(struct window_pane *);
-void		 window_pane_focus_notification_off(struct window_pane *);
 void		 window_pane_focus_notify(struct window_pane *, int);
 int		 window_pane_set_mode(
 		     struct window_pane *, const struct window_mode *);

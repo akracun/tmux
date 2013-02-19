@@ -193,11 +193,10 @@ input_key(struct window_pane *wp, int key)
 	dlen = strlen(ike->data);
 	log_debug2("found key 0x%x: \"%s\"", key, ike->data);
 
-  if ( key == KEYC_FOCUS_IN || key == KEYC_FOCUS_OUT ) {
-	  if (options_get_number(&wp->window->options, "focus-filter"))
-	    if (!(wp->focus_notify & PANE_FOCUS_NOTIFY))
-	      return;
-  }
+  if ((key == KEYC_FOCUS_IN || key == KEYC_FOCUS_OUT) &&
+        options_get_number(&wp->window->options, "focus-filter") &&
+        !(wp->focus_notify & PANE_FOCUS_NOTIFY))
+	    return;
 
 	/* Prefix a \033 for escape. */
 	if (key & KEYC_ESCAPE)

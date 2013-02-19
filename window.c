@@ -958,18 +958,6 @@ window_pane_alternate_off(struct window_pane *wp, struct grid_cell *gc,
 }
 
 void
-window_pane_focus_notification_on(struct window_pane *wp)
-{
-	wp->focus_notify |= PANE_FOCUS_NOTIFY;
-}
-
-void
-window_pane_focus_notification_off(struct window_pane *wp)
-{
-	wp->focus_notify &= ~PANE_FOCUS_NOTIFY;
-}
-
-void
 window_pane_focus_notify(struct window_pane *wp, int focused)
 {
 	if (wp != NULL && wp->event != NULL

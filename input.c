@@ -1261,7 +1261,7 @@ input_csi_dispatch(struct input_ctx *ictx)
 			screen_write_mode_clear(&ictx->ctx, ALL_MOUSE_MODES);
 			break;
 		case 1004:
-			window_pane_focus_notification_off(wp);
+			wp->focus_notify &= ~PANE_FOCUS_NOTIFY;
 			break;
 		case 1005:
 			screen_write_mode_clear(&ictx->ctx, MODE_MOUSE_UTF8);
@@ -1330,7 +1330,7 @@ input_csi_dispatch(struct input_ctx *ictx)
 			screen_write_mode_set(&ictx->ctx, MODE_MOUSE_ANY);
 			break;
 		case 1004:
-			window_pane_focus_notification_on(wp);
+			wp->focus_notify |= PANE_FOCUS_NOTIFY;
 			break;
 		case 1005:
 			screen_write_mode_set(&ictx->ctx, MODE_MOUSE_UTF8);
