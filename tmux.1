@@ -2185,6 +2185,32 @@ Set the amount of time for which status line messages and other on-screen
 indicators are displayed.
 .Ar time
 is in milliseconds.
+.It Xo Ic focus-filter
+.Op Ic on | off
+.Xc
+If this option is
+.Ic off
+(the default),
+focus notification \e033[I and \e033[O escape sequences from the parent terminal will pass 
+through
+.Nm
+to the active pane.
+If this option is on, only active panes that have explicitly registered for focus
+notification will receive these escape sequences.
+.Pp
+.Nm
+also supports sending focus notifcation escape sequences to panes as a result 
+of pane and window selection commands.
+.Pp
+This escape sequence may be used to register a pane for focus notification:
+.Bd -literal -offset indent
+$ printf '\e033[?1004h'
+.Ed
+.Pp
+This escape sequence may be used to unregister a pane for focus notification:
+.Bd -literal -offset indent
+$ printf '\e033[?1004l'
+.Ed
 .It Ic history-limit Ar lines
 Set the maximum number of lines held in window history.
 This setting applies only to new windows - existing window histories are not
