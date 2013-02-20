@@ -1944,7 +1944,7 @@ void	 input_free(struct window_pane *);
 void	 input_parse(struct window_pane *);
 
 /* input-key.c */
-void	 input_key(struct window_pane *, int);
+void	 input_key(struct window_pane *, struct session *, int);
 void	 input_mouse(struct window_pane *, struct session *,
 	     struct mouse_event *);
 

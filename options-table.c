@@ -169,6 +169,11 @@ const struct options_table_entry session_options_table[] = {
 	  .default_num = 750
 	},
 
+	{ .name = "focus-filter",
+	  .type = OPTIONS_TABLE_FLAG,
+	  .default_num = 0
+	},
+
 	{ .name = "history-limit",
 	  .type = OPTIONS_TABLE_NUMBER,
 	  .minimum = 0,
@@ -500,11 +505,6 @@ const struct options_table_entry window_options_table[] = {
 	  .type = OPTIONS_TABLE_CHOICE,
 	  .choices = options_table_clock_mode_style_list,
 	  .default_num = 1
-	},
-
-	{ .name = "focus-filter",
-	  .type = OPTIONS_TABLE_FLAG,
-	  .default_num = 0
 	},
 
 	{ .name = "force-height",

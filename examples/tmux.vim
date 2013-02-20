@@ -50,7 +50,7 @@ syn keyword tmuxOptsSet
 	\ base-index bell-action bell-on-alert default-command default-path
 	\ default-shell default-terminal destroy-unattached detach-on-destroy
 	\ display-panes-active-colour display-panes-colour display-panes-time
-	\ display-time history-limit
+	\ display-time focus-filter history-limit
 	\ lock-after-time lock-command lock-server
 	\ message-command-attr message-attr message-command-bg message-bg
 	\ message-command-fg message-fg message-limit
@@ -69,7 +69,7 @@ syn keyword tmuxOptsSet
 syn keyword tmuxOptsSetw
 	\ aggressive-resize alternate-screen automatic-rename
 	\ c0-change-interval c0-change-trigger clock-mode-colour
-	\ clock-mode-style focus-filter force-height force-width layout-history-limit
+	\ clock-mode-style force-height force-width layout-history-limit
 	\ main-pane-height main-pane-width mode-attr mode-bg mode-fg move-keys
 	\ mode-mouse monitor-activity monitor-content monitor-silence
 	\ other-pane-height other-pane-width pane-base-index remain-on-exit

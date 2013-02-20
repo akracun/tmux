@@ -136,7 +136,7 @@ const struct input_key_ent input_keys[] = {
 
 /* Translate a key code into an output key sequence. */
 void
-input_key(struct window_pane *wp, int key)
+input_key(struct window_pane *wp, struct session *sess, int key)
 {
 	const struct input_key_ent     *ike;
 	u_int				i;
@@ -194,7 +194,7 @@ input_key(struct window_pane *wp, int key)
 	log_debug2("found key 0x%x: \"%s\"", key, ike->data);
 
   if ((key == KEYC_FOCUS_IN || key == KEYC_FOCUS_OUT) &&
-        options_get_number(&wp->window->options, "focus-filter") &&
+        options_get_number(&sess->options, "focus-filter") &&
         !(wp->focus_notify & PANE_FOCUS_NOTIFY))
 	    return;
 

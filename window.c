@@ -1013,13 +1013,13 @@ window_pane_key(struct window_pane *wp, struct session *sess, int key)
 
 	if (wp->fd == -1)
 		return;
-	input_key(wp, key);
+	input_key(wp, sess, key);
 	if (options_get_number(&wp->window->options, "synchronize-panes")) {
 		TAILQ_FOREACH(wp2, &wp->window->panes, entry) {
 			if (wp2 == wp || wp2->mode != NULL)
 				continue;
 			if (wp2->fd != -1 && window_pane_visible(wp2))
-				input_key(wp2, key);
+				input_key(wp2, sess, key);
 		}
 	}
 }
